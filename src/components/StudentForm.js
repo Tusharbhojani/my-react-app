@@ -1,23 +1,59 @@
 import React, { useState } from "react";
 
-const StudentForm = ({students, setStudents}) => {
-  console.log({students, setStudents});
-  
-  const [name, setName] = useState("");
-  const [rollNo, setRollNo] = useState('');
-  const [std, setStd] = useState("");
- 
-  const [mobile, setMobile] = useState("");
+const StudentForm = ({
+  students,
+  setStudents,
+  editId,
+  setEditId,
+  name,
+  rollNo,
+  std,
+  mobile,
+  setName,
+  setRollNo,
+  setStd,
+  setMobile,
+}) => {
+  console.log({
+    students,
+    setStudents,
+    editId,
+    setEditId,
+    name,
+    rollNo,
+    std,
+    mobile,
+    setName,
+    setRollNo,
+    setStd,
+    setMobile,
+  });
 
-  function handleSubmit(e){
-    e.preventDefault(); 
-    setStudents([...students, {name,rollNo,std,mobile}])
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (editId) {
+      const newStudentList = students.map((student) => {
+        if (editId.rollNo === student.rollNo && editId.std === student.std) {
+          return { name, rollNo, std, mobile };
+        }
+        return student;
+      });
+
+      setStudents([...newStudentList]);
+      setEditId(null);
+    } else {
+      setStudents([...students, { name, rollNo, std, mobile }]);
+    }
+    setName("");
+    setRollNo("");
+    setStd("");
+    setMobile("");
   }
 
   return (
     <>
       <form className="p-4">
-        <h1 className="text-lg">Add Student</h1>
+        <h1 className="text-lg">{editId ? `Edit` : `Add`} Student</h1>
 
         <div className="flex flex-col">
           <div>
@@ -60,7 +96,7 @@ const StudentForm = ({students, setStudents}) => {
             />
           </div>
         </div>
-        
+
         <button
           className="border bg-blue-800 text-white p-2 rounded-"
           onClick={handleSubmit}
