@@ -41,6 +41,7 @@ function App() {
         setRollNo={setRollNo}
         setStd={setStd}
         setMobile={setMobile}
+        setStudents={setStudents}
       />
     </div>
   );

@@ -6,8 +6,19 @@ const StudentTable = ({
   setName,
   setRollNo,
   setStd,
-  setMobile,
-}) => {
+  setMobile,setStudents
+}) => {    
+
+  function handelDelete(student) {
+    const newStudentList = students.filter(({rollNo,std}) => {
+        if (student.rollNo === rollNo && student.std === std) {
+          return false
+        }
+        return true;
+      });
+      setStudents(newStudentList);
+  }
+
   return (
     <>
       <h1>Student Table</h1>
@@ -34,6 +45,7 @@ const StudentTable = ({
                   <td>{student.mobile}</td>
                   <td>
                     <button
+                    className="pr-2"
                       onClick={() => {
                         setEditId(student);
                         setName(student.name);
@@ -43,6 +55,13 @@ const StudentTable = ({
                       }}
                     >
                       Edit
+                    </button>
+                    <button
+                      onClick={() => {
+                        handelDelete(student);
+                      }}
+                    >
+                      Delete
                     </button>
                   </td>
                 </tr>
