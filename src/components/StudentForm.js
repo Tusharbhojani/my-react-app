@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 const StudentForm = ({
   students,
-  setStudents,
   editId,
   setEditId,
   name,
@@ -13,10 +12,10 @@ const StudentForm = ({
   setRollNo,
   setStd,
   setMobile,
+  dispatch
 }) => {
   console.log({
     students,
-    setStudents,
     editId,
     setEditId,
     name,
@@ -32,17 +31,17 @@ const StudentForm = ({
   function handleSubmit(e) {
     e.preventDefault();
     if (editId) {
-      const newStudentList = students.map((student) => {
-        if (editId.rollNo === student.rollNo && editId.std === student.std) {
-          return { name, rollNo, std, mobile };
-        }
-        return student;
+      dispatch({
+        type: 'edit',
+        student: { name, rollNo, std, mobile },
+        editId: editId
       });
-
-      setStudents([...newStudentList]);
       setEditId(null);
     } else {
-      setStudents([...students, { name, rollNo, std, mobile }]);
+      dispatch({
+        type: 'add',
+        student: { name, rollNo, std, mobile },
+      });
     }
     setName("");
     setRollNo("");

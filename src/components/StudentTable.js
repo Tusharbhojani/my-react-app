@@ -6,17 +6,14 @@ const StudentTable = ({
   setName,
   setRollNo,
   setStd,
-  setMobile,setStudents
+  setMobile,
+  dispatch
 }) => {    
 
   function handelDelete(student) {
-    const newStudentList = students.filter(({rollNo,std}) => {
-        if (student.rollNo === rollNo && student.std === std) {
-          return false
-        }
-        return true;
-      });
-      setStudents(newStudentList);
+    dispatch({type:'delete', student:student});
+   
+    //   setStudents(newStudentList);
   }
 
   return (

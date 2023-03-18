@@ -1,13 +1,41 @@
-import logo from "./logo.svg";
 import "./App.css";
 import StudentForm from "./components/StudentForm";
 import "./index.css";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import StudentTable from "./components/StudentTable";
+const initialTasks = [];
 
 function App() {
-  const [students, setStudents] = useState([]);
+  const [students, dispatch] = useReducer(studentsReducer, initialTasks);
+
   const [editId, setEditId] = useState(null);
+
+  function studentsReducer(students, action) {
+    switch (action.type) {
+      case "add":
+        return [...students, action.student];
+      case "edit": {
+       
+        return students.map((student) => {
+          if (action.editId.rollNo === student.rollNo && action.editId.std === student.std) {
+            return action.student;
+          }
+          return student;
+        });
+      }
+
+      case 'delete':{
+        return students.filter(({rollNo,std}) => {
+          if (action.student.rollNo === rollNo && action.student.std === std) {
+            return false
+          }
+          return true;
+        });
+      }
+      default:
+        return students;
+    }
+  }
 
   // studebt form
 
@@ -23,8 +51,8 @@ function App() {
         students={students}
         editId={editId}
         setEditId={setEditId}
-        setStudents={setStudents}
         name={name}
+        dispatch={dispatch}
         rollNo={rollNo}
         std={std}
         mobile={mobile}
@@ -34,6 +62,7 @@ function App() {
         setMobile={setMobile}
       />
       <StudentTable
+       dispatch={dispatch}
         students={students}
         editId={editId}
         setEditId={setEditId}
@@ -41,7 +70,6 @@ function App() {
         setRollNo={setRollNo}
         setStd={setStd}
         setMobile={setMobile}
-        setStudents={setStudents}
       />
     </div>
   );
