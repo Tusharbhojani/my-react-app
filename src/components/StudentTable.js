@@ -1,20 +1,13 @@
 import React, { useContext } from "react";
-import { StudentsContext } from "./StudentsContext";
+import { StudentsContext, StudentsDispatchContext } from "./StudentsContext";
 
-const StudentTable = ({
-  setEditId,
-  setName,
-  setRollNo,
-  setStd,
-  setMobile,
-  dispatch
-}) => {    
-
-  
+const StudentTable = ({ setEditId, setName, setRollNo, setStd, setMobile }) => {
+  const dispatch = useContext(StudentsDispatchContext);
   const students = useContext(StudentsContext);
-  console.log({students});
+
+  console.log({ students });
   function handelDelete(student) {
-    dispatch({type:'delete', student:student});
+    dispatch({ type: "delete", student: student });
   }
 
   return (
@@ -43,7 +36,7 @@ const StudentTable = ({
                   <td>{student.mobile}</td>
                   <td>
                     <button
-                    className="pr-2"
+                      className="pr-2"
                       onClick={() => {
                         setEditId(student);
                         setName(student.name);

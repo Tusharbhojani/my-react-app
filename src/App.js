@@ -4,43 +4,12 @@ import StudentForm from "./components/StudentForm";
 import "./index.css";
 import { useReducer, useState } from "react";
 import StudentTable from "./components/StudentTable";
-import { StudentsContext } from "./components/StudentsContext";
-const initialTasks = [];
+import {
+  StudentsProvider,
+} from "./components/StudentsContext";
 
 function App() {
-  const [students, dispatch] = useReducer(studentsReducer, initialTasks);
-
   const [editId, setEditId] = useState(null);
-
-  function studentsReducer(students, action) {
-    switch (action.type) {
-      case "add":
-        return [...students, action.student];
-      case "edit": {
-        return students.map((student) => {
-          if (
-            action.editId.rollNo === student.rollNo &&
-            action.editId.std === student.std
-          ) {
-            return action.student;
-          }
-          return student;
-        });
-      }
-
-      case "delete": {
-        return students.filter(({ rollNo, std }) => {
-          if (action.student.rollNo === rollNo && action.student.std === std) {
-            return false;
-          }
-          return true;
-        });
-      }
-      default:
-        return students;
-    }
-  }
-
   // studebt form
 
   const [name, setName] = useState("");
@@ -49,32 +18,30 @@ function App() {
   const [mobile, setMobile] = useState("");
 
   return (
-    <StudentsContext.Provider value={students}>
+    <StudentsProvider>
       <div>
         <h1>My React school</h1>
         <StudentForm
-          editId={editId}
-          setEditId={setEditId}
           name={name}
-          dispatch={dispatch}
-          rollNo={rollNo}
           std={std}
+          rollNo={rollNo}
           mobile={mobile}
           setName={setName}
           setRollNo={setRollNo}
           setStd={setStd}
           setMobile={setMobile}
+          editId={editId}
+          setEditId={setEditId}
         />
         <StudentTable
-          dispatch={dispatch}
-          setEditId={setEditId}
           setName={setName}
           setRollNo={setRollNo}
           setStd={setStd}
           setMobile={setMobile}
+          setEditId={setEditId}
         />
       </div>
-    </StudentsContext.Provider>
+    </StudentsProvider>
   );
 }
 

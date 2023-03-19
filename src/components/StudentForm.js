@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { StudentsContext } from "./StudentsContext";
+import { StudentsDispatchContext } from "./StudentsContext";
 
 const StudentForm = ({
   editId,
@@ -12,22 +12,21 @@ const StudentForm = ({
   setRollNo,
   setStd,
   setMobile,
-  dispatch
 }) => {
-  const students = useContext(StudentsContext);
+  const dispatch = useContext(StudentsDispatchContext);
 
   function handleSubmit(e) {
     e.preventDefault();
     if (editId) {
       dispatch({
-        type: 'edit',
+        type: "edit",
         student: { name, rollNo, std, mobile },
-        editId: editId
+        editId: editId,
       });
       setEditId(null);
     } else {
       dispatch({
-        type: 'add',
+        type: "add",
         student: { name, rollNo, std, mobile },
       });
     }
