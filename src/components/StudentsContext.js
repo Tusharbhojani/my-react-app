@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 
 export const StudentsContext = createContext(null);
 export const StudentsDispatchContext = createContext(null);
@@ -44,4 +44,10 @@ export function StudentsProvider({ children }) {
       </StudentsDispatchContext.Provider>
     </StudentsContext.Provider>
   );
+}
+
+export function useStudents() {
+  const dispatch = useContext(StudentsDispatchContext);
+  const students = useContext(StudentsContext);
+  return {dispatch, students};
 }

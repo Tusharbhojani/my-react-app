@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
-import { StudentsContext, StudentsDispatchContext } from "./StudentsContext";
+import React from "react";
+import { useStudents } from "./StudentsContext";
 
 const StudentTable = ({ setEditId, setName, setRollNo, setStd, setMobile }) => {
-  const dispatch = useContext(StudentsDispatchContext);
-  const students = useContext(StudentsContext);
+  const { dispatch, students } = useStudents();
 
   console.log({ students });
   function handelDelete(student) {
