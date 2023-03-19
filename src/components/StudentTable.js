@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
+import { StudentsContext } from "./StudentsContext";
 
 const StudentTable = ({
-  students,
   setEditId,
   setName,
   setRollNo,
@@ -10,10 +10,11 @@ const StudentTable = ({
   dispatch
 }) => {    
 
+  
+  const students = useContext(StudentsContext);
+  console.log({students});
   function handelDelete(student) {
     dispatch({type:'delete', student:student});
-   
-    //   setStudents(newStudentList);
   }
 
   return (

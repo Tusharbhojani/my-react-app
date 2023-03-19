@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { StudentsContext } from "./StudentsContext";
 
 const StudentForm = ({
-  students,
   editId,
   setEditId,
   name,
@@ -14,19 +14,7 @@ const StudentForm = ({
   setMobile,
   dispatch
 }) => {
-  console.log({
-    students,
-    editId,
-    setEditId,
-    name,
-    rollNo,
-    std,
-    mobile,
-    setName,
-    setRollNo,
-    setStd,
-    setMobile,
-  });
+  const students = useContext(StudentsContext);
 
   function handleSubmit(e) {
     e.preventDefault();

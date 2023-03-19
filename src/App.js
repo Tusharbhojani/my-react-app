@@ -1,8 +1,10 @@
+import React from "react";
 import "./App.css";
 import StudentForm from "./components/StudentForm";
 import "./index.css";
 import { useReducer, useState } from "react";
 import StudentTable from "./components/StudentTable";
+import { StudentsContext } from "./components/StudentsContext";
 const initialTasks = [];
 
 function App() {
@@ -15,19 +17,21 @@ function App() {
       case "add":
         return [...students, action.student];
       case "edit": {
-       
         return students.map((student) => {
-          if (action.editId.rollNo === student.rollNo && action.editId.std === student.std) {
+          if (
+            action.editId.rollNo === student.rollNo &&
+            action.editId.std === student.std
+          ) {
             return action.student;
           }
           return student;
         });
       }
 
-      case 'delete':{
-        return students.filter(({rollNo,std}) => {
+      case "delete": {
+        return students.filter(({ rollNo, std }) => {
           if (action.student.rollNo === rollNo && action.student.std === std) {
-            return false
+            return false;
           }
           return true;
         });
@@ -45,33 +49,32 @@ function App() {
   const [mobile, setMobile] = useState("");
 
   return (
-    <div>
-      <h1>My React school</h1>
-      <StudentForm
-        students={students}
-        editId={editId}
-        setEditId={setEditId}
-        name={name}
-        dispatch={dispatch}
-        rollNo={rollNo}
-        std={std}
-        mobile={mobile}
-        setName={setName}
-        setRollNo={setRollNo}
-        setStd={setStd}
-        setMobile={setMobile}
-      />
-      <StudentTable
-       dispatch={dispatch}
-        students={students}
-        editId={editId}
-        setEditId={setEditId}
-        setName={setName}
-        setRollNo={setRollNo}
-        setStd={setStd}
-        setMobile={setMobile}
-      />
-    </div>
+    <StudentsContext.Provider value={students}>
+      <div>
+        <h1>My React school</h1>
+        <StudentForm
+          editId={editId}
+          setEditId={setEditId}
+          name={name}
+          dispatch={dispatch}
+          rollNo={rollNo}
+          std={std}
+          mobile={mobile}
+          setName={setName}
+          setRollNo={setRollNo}
+          setStd={setStd}
+          setMobile={setMobile}
+        />
+        <StudentTable
+          dispatch={dispatch}
+          setEditId={setEditId}
+          setName={setName}
+          setRollNo={setRollNo}
+          setStd={setStd}
+          setMobile={setMobile}
+        />
+      </div>
+    </StudentsContext.Provider>
   );
 }
 
