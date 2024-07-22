@@ -7,6 +7,8 @@ import StudentTable from "./components/StudentTable";
 import {
   StudentsProvider,
 } from "./components/StudentsContext";
+import { SignupForm } from "./components/formik/FormikForm";
+import { FormikHookForm } from "./components/formik/FormikHookForm";
 
 function App() {
   const [editId, setEditId] = useState(null);
@@ -21,7 +23,9 @@ function App() {
     <StudentsProvider>
       <div>
         <h1>My React school</h1>
-        <StudentForm
+        {/* <SignupForm /> */}
+        <FormikHookForm/>
+        {/* <StudentForm
           name={name}
           std={std}
           rollNo={rollNo}
@@ -39,7 +43,7 @@ function App() {
           setStd={setStd}
           setMobile={setMobile}
           setEditId={setEditId}
-        />
+        /> */}
       </div>
     </StudentsProvider>
   );

@@ -16,3 +16,7 @@ table th,
 table td {
     @apply border border-slate-300 p-2;
 }
+
+input {
+    border: 1px solid #ccc;
+}
