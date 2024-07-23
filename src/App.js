@@ -9,6 +9,8 @@ import {
 } from "./components/StudentsContext";
 import { SignupForm } from "./components/formik/FormikForm";
 import { FormikHookForm } from "./components/formik/FormikHookForm";
+import { LearnContext} from "./components/hook/LearnContext";
+
 
 function App() {
   const [editId, setEditId] = useState(null);
@@ -22,9 +24,10 @@ function App() {
   return (
     <StudentsProvider>
       <div>
+        <LearnContext />
         <h1>My React school</h1>
         {/* <SignupForm /> */}
-        <FormikHookForm/>
+        {/* <FormikHookForm/> */}
         {/* <StudentForm
           name={name}
           std={std}
