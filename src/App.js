@@ -10,6 +10,7 @@ import {
 import { SignupForm } from "./components/formik/FormikForm";
 import { FormikHookForm } from "./components/formik/FormikHookForm";
 import { LearnContext} from "./components/hook/LearnContext";
+import Component from "./components/hook/custom/Component";
 
 
 function App() {
@@ -24,8 +25,9 @@ function App() {
   return (
     <StudentsProvider>
       <div>
-        <LearnContext />
-        <h1>My React school</h1>
+        {/* <LearnContext /> */}
+        <Component />
+        {/* <h1>My React school</h1> */}
         {/* <SignupForm /> */}
         {/* <FormikHookForm/> */}
         {/* <StudentForm
