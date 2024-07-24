@@ -11,6 +11,7 @@ import { SignupForm } from "./components/formik/FormikForm";
 import { FormikHookForm } from "./components/formik/FormikHookForm";
 import { LearnContext} from "./components/hook/LearnContext";
 import Component from "./components/hook/custom/Component";
+import ThrottleComponent from "./components/hook/custom/ThrottleComponent";
 
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
     <StudentsProvider>
       <div>
         {/* <LearnContext /> */}
-        <Component />
+        {/* <Component /> */}
+        <ThrottleComponent />
         {/* <h1>My React school</h1> */}
         {/* <SignupForm /> */}
         {/* <FormikHookForm/> */}
